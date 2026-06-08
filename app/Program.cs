@@ -22,9 +22,12 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/weatherforecast", (int count = 5) =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
+    // 限制筆數範圍在 1-30 之間
+    count = Math.Max(1, Math.Min(30, count));
+    
+    var forecast =  Enumerable.Range(1, count).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -34,7 +37,8 @@ app.MapGet("/weatherforecast", () =>
         .ToArray();
     return forecast;
 })
-.WithName("GetWeatherForecast");
+.WithName("GetWeatherForecast")
+.WithDescription("取得天氣預報資料，可指定回傳筆數 (預設 5 筆，範圍 1-30)");
 
 app.MapGet("/currenttime", () =>
 {
