@@ -55,11 +55,11 @@ app.MapGet("/currenttime", () =>
 .WithName("GetCurrentTime")
 .WithDescription("取得當前時間資訊，包含本地時間、UTC 時間、時區等");
 
-app.MapGet("/health", () =>
+app.MapGet("/hello", () =>
 {
     var startTime = DateTime.Now;
     var healthInfo = new HealthCheckInfo(
-        Status: "Healthy",
+        Status: "Hello World",
         Timestamp: DateTime.Now,
         Version: "1.0.0",
         Environment: app.Environment.EnvironmentName,
