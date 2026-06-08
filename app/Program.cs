@@ -1,3 +1,4 @@
+//last_update:20260608
 using Scalar.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 
