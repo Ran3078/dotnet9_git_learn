@@ -59,7 +59,7 @@ app.MapGet("/health", () =>
 {
     var startTime = DateTime.Now;
     var healthInfo = new HealthCheckInfo(
-        Status: "Healthy",
+        Status: "Hello",
         Timestamp: DateTime.Now,
         Version: "1.0.0",
         Environment: app.Environment.EnvironmentName,
