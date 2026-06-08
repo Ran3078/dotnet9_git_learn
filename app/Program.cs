@@ -63,8 +63,6 @@ app.MapGet("/hello", () =>
         Timestamp: DateTime.Now,
         Version: "1.0.0",
         Environment: app.Environment.EnvironmentName,
-        MachineName: Environment.MachineName,
-        OsVersion: Environment.OSVersion.ToString(),
         ProcessorCount: Environment.ProcessorCount,
         WorkingSet: Environment.WorkingSet / 1024 / 1024, // MB
         Message: "服務運作正常"
@@ -96,8 +94,6 @@ record HealthCheckInfo(
     DateTime Timestamp,
     string Version,
     string Environment,
-    string MachineName,
-    string OsVersion,
     int ProcessorCount,
     long WorkingSet,
     string Message
