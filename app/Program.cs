@@ -36,9 +36,37 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
+app.MapGet("/currenttime", () =>
+{
+    var now = DateTime.Now;
+    var utcNow = DateTime.UtcNow;
+    
+    var timeInfo = new CurrentTimeInfo(
+        LocalTime: now,
+        UtcTime: utcNow,
+        TimeZone: TimeZoneInfo.Local.DisplayName,
+        UnixTimestamp: DateTimeOffset.Now.ToUnixTimeSeconds(),
+        DayOfWeek: now.DayOfWeek.ToString(),
+        DayOfYear: now.DayOfYear
+    );
+    
+    return timeInfo;
+})
+.WithName("GetCurrentTime")
+.WithDescription("取得當前時間資訊，包含本地時間、UTC 時間、時區等");
+
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
+
+record CurrentTimeInfo(
+    DateTime LocalTime,
+    DateTime UtcTime,
+    string TimeZone,
+    long UnixTimestamp,
+    string DayOfWeek,
+    int DayOfYear
+);
